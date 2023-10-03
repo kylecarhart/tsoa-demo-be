@@ -5,3 +5,10 @@ export interface User {
   status?: "Happy" | "Sad";
   phoneNumbers: string[];
 }
+
+export interface Item {
+  id: number;
+  name: string;
+  price: number;
+  description: string;
+}

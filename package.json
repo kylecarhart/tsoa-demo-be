@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon",
-    "build": "tsoa spec-and-routes && tsc",
+    "build": "yarn gen && tsc",
+    "gen": "tsoa spec-and-routes",
     "start": "node build/src/server.js"
   },
   "dependencies": {
