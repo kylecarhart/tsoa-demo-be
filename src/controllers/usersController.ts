@@ -1,5 +1,3 @@
-import { UserCreationParams, UsersService } from "@services/usersService";
-import { User } from "src/types";
 import {
   Body,
   Controller,
@@ -10,6 +8,8 @@ import {
   Route,
   SuccessResponse,
 } from "tsoa";
+import { User } from "../types";
+import { UserCreationParams, UsersService } from "../services/usersService";
 
 @Route("users")
 export class UsersController extends Controller {

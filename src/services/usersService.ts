@@ -1,4 +1,4 @@
-import { User } from "src/types";
+import { User } from "../types";
 
 // A post request should not contain an id.
 export type UserCreationParams = Pick<User, "email" | "name" | "phoneNumbers">;
