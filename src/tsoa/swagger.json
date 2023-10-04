@@ -8,90 +8,80 @@
 		"schemas": {
 			"Item": {
 				"properties": {
-					"id": {
-						"type": "number",
-						"format": "double"
-					},
-					"name": {
+					"description": {
 						"type": "string"
 					},
 					"price": {
 						"type": "number",
 						"format": "double"
 					},
-					"description": {
+					"name": {
+						"type": "string"
+					},
+					"id": {
 						"type": "string"
 					}
 				},
 				"required": [
-					"id",
-					"name",
+					"description",
 					"price",
-					"description"
+					"name",
+					"id"
 				],
-				"type": "object",
-				"additionalProperties": false
+				"type": "object"
 			},
-			"User": {
+			"OrderItem": {
 				"properties": {
-					"id": {
+					"quantity": {
 						"type": "number",
 						"format": "double"
 					},
-					"email": {
-						"type": "string"
-					},
-					"name": {
-						"type": "string"
-					},
-					"status": {
-						"type": "string",
-						"enum": [
-							"Happy",
-							"Sad"
-						]
-					},
-					"phoneNumbers": {
-						"items": {
-							"type": "string"
-						},
-						"type": "array"
+					"item": {
+						"$ref": "#/components/schemas/Item"
 					}
 				},
 				"required": [
-					"id",
-					"email",
-					"name",
-					"phoneNumbers"
+					"quantity",
+					"item"
 				],
-				"type": "object",
-				"additionalProperties": false
+				"type": "object"
 			},
-			"Pick_User.email-or-name-or-phoneNumbers_": {
+			"Order": {
 				"properties": {
-					"email": {
-						"type": "string"
+					"total": {
+						"type": "number",
+						"format": "double"
 					},
-					"name": {
-						"type": "string"
-					},
-					"phoneNumbers": {
+					"items": {
 						"items": {
-							"type": "string"
+							"$ref": "#/components/schemas/OrderItem"
+						},
+						"type": "array"
+					},
+					"id": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"total",
+					"items",
+					"id"
+				],
+				"type": "object"
+			},
+			"OrderRequest": {
+				"properties": {
+					"items": {
+						"items": {
+							"$ref": "#/components/schemas/OrderItem"
 						},
 						"type": "array"
 					}
 				},
 				"required": [
-					"email",
-					"name",
-					"phoneNumbers"
+					"items"
 				],
-				"type": "object",
-				"description": "From T, pick a set of properties whose keys are in the union K"
-			},
-			"UserCreationParams": {
-				"$ref": "#/components/schemas/Pick_User.email-or-name-or-phoneNumbers_"
+				"type": "object"
 			}
 		},
 		"securitySchemes": {}
@@ -141,8 +131,7 @@
 						"name": "itemId",
 						"required": true,
 						"schema": {
-							"format": "double",
-							"type": "number"
+							"type": "string"
 						}
 					}
 				]
@@ -173,36 +162,40 @@
 				"parameters": []
 			}
 		},
-		"/users/{userId}": {
+		"/orders/{orderId}": {
 			"get": {
-				"operationId": "GetUser",
+				"operationId": "GetOrder",
 				"responses": {
 					"200": {
 						"description": "Ok",
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/User"
+									"$ref": "#/components/schemas/Order"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "string"
 								}
 							}
 						}
 					}
 				},
+				"tags": [
+					"Orders"
+				],
 				"security": [],
 				"parameters": [
 					{
 						"in": "path",
-						"name": "userId",
+						"name": "orderId",
 						"required": true,
-						"schema": {
-							"format": "double",
-							"type": "number"
-						}
-					},
-					{
-						"in": "query",
-						"name": "name",
-						"required": false,
 						"schema": {
 							"type": "string"
 						}
@@ -210,14 +203,57 @@
 				]
 			}
 		},
-		"/users": {
-			"post": {
-				"operationId": "CreateUser",
+		"/orders": {
+			"get": {
+				"operationId": "GetAllOrders",
 				"responses": {
-					"201": {
-						"description": "Created"
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/Order"
+									},
+									"type": "array"
+								}
+							}
+						}
 					}
 				},
+				"tags": [
+					"Orders"
+				],
+				"security": [],
+				"parameters": []
+			},
+			"post": {
+				"operationId": "CreateOrder",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Order"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Orders"
+				],
 				"security": [],
 				"parameters": [],
 				"requestBody": {
@@ -225,7 +261,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/UserCreationParams"
+								"$ref": "#/components/schemas/OrderRequest"
 							}
 						}
 					}
@@ -235,7 +271,7 @@
 	},
 	"servers": [
 		{
-			"url": "/"
+			"url": "http://localhost:4000/"
 		}
 	]
 }

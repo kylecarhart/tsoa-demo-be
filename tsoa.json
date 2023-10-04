@@ -4,7 +4,9 @@
   "controllerPathGlobs": ["src/**/*Controller.ts"],
   "spec": {
     "outputDirectory": "src/tsoa",
-    "specVersion": 3
+    "specVersion": 3,
+    "host": "localhost:4000",
+    "schemes": ["http"]
   },
   "routes": {
     "routesDir": "src/tsoa"

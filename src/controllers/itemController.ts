@@ -7,7 +7,7 @@ import { Item } from "../types";
 export class ItemController extends Controller {
   @Get("{itemId}")
   public async getItem(
-    @Path() itemId: number,
+    @Path() itemId: string,
     @Res() notFoundResponse: TsoaResponse<404, string>
   ): Promise<Item> {
     const item = new ItemService().getById(itemId);

@@ -6,9 +6,41 @@ export interface User {
   phoneNumbers: string[];
 }
 
-export interface Item {
-  id: number;
+export type Item = {
+  id: string;
   name: string;
   price: number;
   description: string;
-}
+};
+
+export type OrderItem = {
+  item: Item;
+  quantity: number;
+};
+
+export type OrderRequest = {
+  items: OrderItem[];
+};
+
+export type Order = {
+  id: string;
+  items: OrderItem[];
+  total: number;
+};
+
+// interface ErrorResponse {
+//   message: string;
+//   code: string;
+//   httpStatusCode: number;
+// }
+
+// export class AppErrorResponse extends Error implements ErrorResponse {
+//   httpStatusCode: number = 500;
+//   code: string;
+
+//   constructor(message: string, code: string, httpStatusCode: number = 500) {
+//     super(message);
+//     this.code = code;
+//     this.httpStatusCode = httpStatusCode;
+//   }
+// }

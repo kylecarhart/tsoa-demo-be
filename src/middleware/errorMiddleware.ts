@@ -18,6 +18,15 @@ export function errorMiddleware(
       details: err?.fields,
     });
   }
+
+  /* Just an idea */
+  // if (err instanceof AppErrorResponse) {
+  //   return res.status(err.httpStatusCode).json({
+  //     message: err.message,
+  //     code: err.code,
+  //   });
+  // }
+
   if (err instanceof Error) {
     return res.status(500).json({
       message: "Internal Server Error",
