@@ -1,20 +1,19 @@
 import { Order, OrderRequest } from "../types";
 import { ItemService } from "./itemService";
 import isEqual from "lodash/isEqual";
+import crypto from "crypto";
 
 let ORDERS: Order[] = [];
 
 export class OrderService {
-  public create(orderRequest: OrderRequest): Order {
-    const { items: orderItems } = orderRequest;
-
+  public async create(orderRequest: OrderRequest): Promise<Order> {
     const order: Order = {
       id: crypto.randomUUID(),
       items: [],
       total: 0,
     };
 
-    orderItems.forEach((orderItem) => {
+    orderRequest.items.forEach((orderItem) => {
       const orderItemId = orderItem.item.id;
       const item = new ItemService().getById(orderItemId);
 

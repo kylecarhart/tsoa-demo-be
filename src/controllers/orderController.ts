@@ -34,15 +34,20 @@ export class OrderController extends Controller {
     return new OrderService().getAll();
   }
 
-  @Post()
+  @Post("/create")
   public async createOrder(
     @Body() orderRequest: OrderRequest,
-    @Res() serverErrorResponse: TsoaResponse<500, string>
+    @Res() serverErrorResponse: TsoaResponse<500, string>,
+    @Res() badRequestResponse: TsoaResponse<400, string>
   ): Promise<Order> {
-    const order = new OrderService().create(orderRequest);
+    if (orderRequest.items.length === 0) {
+      return badRequestResponse(400, "Order must have at least one item.");
+    }
+
+    const order = await new OrderService().create(orderRequest);
 
     if (!order) {
-      return serverErrorResponse(500, "Internal server error");
+      return serverErrorResponse(500, "Internal server error.");
     }
 
     return order;

@@ -20,6 +20,7 @@ export type OrderItem = {
 
 export type OrderRequest = {
   items: OrderItem[];
+  total: number;
 };
 
 export type Order = {
