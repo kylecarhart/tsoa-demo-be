@@ -29,11 +29,10 @@ export type Order = {
   total: number;
 };
 
-// interface ErrorResponse {
-//   message: string;
-//   code: string;
-//   httpStatusCode: number;
-// }
+export interface ErrorResponse {
+  message: string;
+  code: string;
+}
 
 // export class AppErrorResponse extends Error implements ErrorResponse {
 //   httpStatusCode: number = 500;

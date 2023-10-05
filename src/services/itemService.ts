@@ -3,21 +3,23 @@ import { Item } from "../types";
 const ITEMS: Item[] = [
   {
     id: "99b7d2d9-e80f-4ffe-9487-5681d6e40b1f",
-    name: "Item 1",
-    price: 100,
-    description: "This is item 1",
+    name: "Burger",
+    price: 4.99,
+    description:
+      "This burger is made with 100% beef, lettuce, tomato, and onion and pickles.",
   },
   {
     id: "fa7b531b-1097-4483-913d-64eae4695314",
-    name: "Item 2",
-    price: 200,
-    description: "This is item 2",
+    name: "Fries",
+    price: 2.99,
+    description: "These fries are made from the finest potatoes in the world.",
   },
   {
     id: "dae7102d-2b6a-4521-bfe7-59a3aefa1522",
-    name: "Item 3",
-    price: 300,
-    description: "This is item 3",
+    name: "Milkshake",
+    price: 4.99,
+    description:
+      "Hand-spun milkshake with your choice of chocolate or vanilla.",
   },
 ];
 

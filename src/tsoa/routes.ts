@@ -26,6 +26,15 @@ const models: TsoaRoute.Models = {
         "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"total":{"dataType":"double","required":true},"items":{"dataType":"array","array":{"dataType":"refAlias","ref":"OrderItem"},"required":true},"id":{"dataType":"string","required":true}},"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ErrorResponse": {
+        "dataType": "refObject",
+        "properties": {
+            "message": {"dataType":"string","required":true},
+            "code": {"dataType":"string","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "OrderRequest": {
         "dataType": "refAlias",
         "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"total":{"dataType":"double","required":true},"items":{"dataType":"array","array":{"dataType":"refAlias","ref":"OrderItem"},"required":true}},"validators":{}},
@@ -98,7 +107,7 @@ export function RegisterRoutes(app: Router) {
             function OrderController_getOrder(request: any, response: any, next: any) {
             const args = {
                     orderId: {"in":"path","name":"orderId","required":true,"dataType":"string"},
-                    notFoundResponse: {"in":"res","name":"404","required":true,"dataType":"string"},
+                    notFoundResponse: {"in":"res","name":"404","required":true,"ref":"ErrorResponse"},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -148,8 +157,8 @@ export function RegisterRoutes(app: Router) {
             function OrderController_createOrder(request: any, response: any, next: any) {
             const args = {
                     orderRequest: {"in":"body","name":"orderRequest","required":true,"ref":"OrderRequest"},
-                    serverErrorResponse: {"in":"res","name":"500","required":true,"dataType":"string"},
-                    badRequestResponse: {"in":"res","name":"400","required":true,"dataType":"string"},
+                    serverErrorResponse: {"in":"res","name":"500","required":true,"ref":"ErrorResponse"},
+                    badRequestResponse: {"in":"res","name":"400","required":true,"ref":"ErrorResponse"},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa

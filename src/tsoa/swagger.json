@@ -69,6 +69,22 @@
 				],
 				"type": "object"
 			},
+			"ErrorResponse": {
+				"properties": {
+					"message": {
+						"type": "string"
+					},
+					"code": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"message",
+					"code"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"OrderRequest": {
 				"properties": {
 					"total": {
@@ -186,7 +202,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"type": "string"
+									"$ref": "#/components/schemas/ErrorResponse"
 								}
 							}
 						}
@@ -252,7 +268,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"type": "string"
+									"$ref": "#/components/schemas/ErrorResponse"
 								}
 							}
 						}
@@ -262,7 +278,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"type": "string"
+									"$ref": "#/components/schemas/ErrorResponse"
 								}
 							}
 						}
