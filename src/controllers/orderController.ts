@@ -16,6 +16,7 @@ import {
   ORDER_NOT_FOUND,
   ORDER_NO_ITEMS,
 } from "../utils/errors";
+import { Delay } from "../utils/delay";
 
 @Route("orders")
 @Tags("Orders")
@@ -39,6 +40,7 @@ export class OrderController extends Controller {
     return new OrderService().getAll();
   }
 
+  @Delay(3000)
   @Post("/create")
   public async createOrder(
     @Body() orderRequest: OrderRequest,
