@@ -1,5 +1,5 @@
 {
-  "name": "nextjs-tsoa-be",
+  "name": "tsoa-demo-be",
   "version": "1.0.0",
   "main": "build/src/server.js",
   "license": "MIT",

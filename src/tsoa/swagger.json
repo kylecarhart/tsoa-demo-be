@@ -108,7 +108,7 @@
 		"securitySchemes": {}
 	},
 	"info": {
-		"title": "nextjs-tsoa-be",
+		"title": "tsoa-demo-be",
 		"version": "1.0.0",
 		"license": {
 			"name": "MIT"
